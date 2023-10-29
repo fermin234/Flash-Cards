@@ -8,9 +8,9 @@ const SignUp = () => {
     </View>
   )
 }
+const styles = StyleSheet.create({})
 
 export default SignUp
 
-const styles = StyleSheet.create({})
 
 //rnfes
