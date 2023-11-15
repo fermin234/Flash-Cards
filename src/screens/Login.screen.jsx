@@ -9,6 +9,7 @@ import { ROUTES } from '../constants/navigation.constants';
 import { COLORS, COMPONENT, FONT } from '../constants/style.contstants';
 import { useUser } from '../hooks/auth';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from '../hooks/form';
 
 const baseState = () => ({
   email: '',
@@ -19,16 +20,12 @@ const Login = () => {
   const navigation = useNavigation()
 
   const [user, setUser] = useUser();
-  const [form, setForm] = useState(baseState());
+  const [form, setForm] = useForm(baseState());
 
   const [valid, setValid] = useState(false);
   const [error, setError] = useState(null);
 
   const { email, password } = form;
-
-  const handleChange = ({ value, key }) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-  };
 
   const doLogin = useCallback(async () => {
     const [loginError, userCredentials] = await to(
@@ -79,7 +76,7 @@ const Login = () => {
             placeholder="Email Address"
             value={email}
             textContentType="emailAddress"
-            onChangeText={(value) => handleChange({ key: 'email', value })}
+            onChangeText={(value) => setForm({ key: 'email', value })}
           />
           <TextInput
             style={error ? styles.inputError : styles.input}
@@ -87,7 +84,7 @@ const Login = () => {
             value={password}
             textContentType="password"
             secureTextEntry
-            onChangeText={(value) => handleChange({ key: 'password', value })}
+            onChangeText={(value) => setForm({ key: 'password', value })}
           />
 
           <Button

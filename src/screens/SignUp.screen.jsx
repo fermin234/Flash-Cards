@@ -9,6 +9,7 @@ import { MESSAGES } from '../constants/errors.contstants';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../constants/navigation.constants';
 import { useUser } from '../hooks/auth';
+import { useForm } from '../hooks/form';
 
 const baseState = () => ({
   email: '',
@@ -20,16 +21,12 @@ const SignUp = () => {
   const navigation = useNavigation()
 
   const [user, setUser] = useUser();
-  const [form, setForm] = useState(baseState());
+  const [form, setForm] = useForm(baseState());
 
   const [valid, setValid] = useState(false);
   const [error, setError] = useState(null);
 
   const { email, password, passwordConfirmation } = form;
-
-  const handleChange = ({ value, key }) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-  };
 
   const doSignUp = useCallback(async () => {
     const [signUpError, userCredentials] = await to(
@@ -82,7 +79,7 @@ const SignUp = () => {
             textContentType='emailAddress'
             value={email}
             style={styles.input}
-            onChangeText={(value) => handleChange({ key: 'email', value })}
+            onChangeText={(value) => setForm({ key: 'email', value })}
           />
           <TextInput
             style={styles.input}
@@ -90,7 +87,7 @@ const SignUp = () => {
             value={password}
             textContentType="password"
             secureTextEntry
-            onChangeText={(value) => handleChange({ key: 'password', value })}
+            onChangeText={(value) => setForm({ key: 'password', value })}
           />
           <TextInput
             style={styles.input}
@@ -99,7 +96,7 @@ const SignUp = () => {
             textContentType="password"
             secureTextEntry
             onChangeText={(value) =>
-              handleChange({ key: 'passwordConfirmation', value })
+              setForm({ key: 'passwordConfirmation', value })
             }
           />
 

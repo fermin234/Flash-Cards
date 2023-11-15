@@ -4,13 +4,14 @@ import { ROUTES } from '../constants/navigation.constants';
 import SignUp from '../screens/SignUp.screen';
 import Categories from '../screens/Categories.screen';
 import Login from '../screens/Login.screen';
+import Cards from '../screens/Cards.screen';
 
 const Stack = createNativeStackNavigator()
 
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={ROUTES.login}>
+      <Stack.Navigator initialRouteName={ROUTES.login}>
         <Stack.Screen
           name={ROUTES.login}
           component={Login} />
@@ -22,6 +23,9 @@ const Navigation = () => {
           name={ROUTES.categories}
           component={Categories}
         />
+        <Stack.Screen
+          name={ROUTES.cards.name}
+          component={Cards} />
       </Stack.Navigator>
     </NavigationContainer>
   );
