@@ -5,7 +5,7 @@ import { COLORS, COMPONENT, FONT } from '../constants/style.contstants'
 import { useState, useEffect } from 'react'
 import { useUser } from '../hooks/auth'
 import { useModal } from '../hooks/modal'
-import { categories } from '../api/db';
+import { cards, categories } from '../api/db';
 
 
 const AddCategory = () => {

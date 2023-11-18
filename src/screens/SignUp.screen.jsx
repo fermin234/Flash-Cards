@@ -6,7 +6,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../api/db';
 import to from 'await-to-js';
 import { MESSAGES } from '../constants/errors.contstants';
-import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../constants/navigation.constants';
 import { useUser } from '../hooks/auth';
 import { useForm } from '../hooks/form';
@@ -17,9 +16,7 @@ const baseState = () => ({
   passwordConfirmation: '',
 });
 
-const SignUp = () => {
-  const navigation = useNavigation()
-
+const SignUp = ({ navigation }) => {
   const [user, setUser] = useUser();
   const [form, setForm] = useForm(baseState());
 

@@ -8,7 +8,6 @@ import { MESSAGES } from '../constants/errors.contstants';
 import { ROUTES } from '../constants/navigation.constants';
 import { COLORS, COMPONENT, FONT } from '../constants/style.contstants';
 import { useUser } from '../hooks/auth';
-import { useNavigation } from '@react-navigation/native';
 import { useForm } from '../hooks/form';
 
 const baseState = () => ({
@@ -16,8 +15,7 @@ const baseState = () => ({
   password: '',
 });
 
-const Login = () => {
-  const navigation = useNavigation()
+const Login = ({ navigation }) => {
 
   const [user, setUser] = useUser();
   const [form, setForm] = useForm(baseState());

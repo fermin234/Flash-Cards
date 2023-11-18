@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUser } from "./auth";
-import { categories as DBCategories } from "../api/db";
+import { categories as DBCategories, cards as DBCards } from "../api/db";
 
 export const useCategories = () => {
   const [user] = useUser();
@@ -25,4 +25,22 @@ export const useCategories = () => {
   }, [user]);
 
   return categories;
+};
+
+export const useCards = (categoryId) => {
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const query = DBCards.where("categoryId", "==", categoryId);
+    query.onSnapshot((qs) => {
+      const results = qs.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setCards(results);
+    });
+  }, [categoryId]);
+
+  return cards;
 };

@@ -17,12 +17,10 @@ const Navigation = () => {
           component={Login} />
         <Stack.Screen
           name={ROUTES.signup}
-          component={SignUp}
-        />
+          component={SignUp} />
         <Stack.Screen
           name={ROUTES.categories}
-          component={Categories}
-        />
+          component={Categories} />
         <Stack.Screen
           name={ROUTES.cards.name}
           component={Cards} />
