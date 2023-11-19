@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Avatar, BottomSheet, ListItem } from '@rneui/base';
 import { auth } from '../api/db';
@@ -7,7 +7,6 @@ import { ROUTES } from '../constants/navigation.constants';
 import { useUser } from '../hooks/auth';
 
 const UserInfo = ({ children }) => {
-
   const [user, setUser] = useUser();
   const [visible, setVisible] = useState(false);
   const navigation = useNavigation()
@@ -27,6 +26,7 @@ const UserInfo = ({ children }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
+        <Text>{user.email}</Text>
         <Avatar
           source={{ uri: `https://picsum.photos/seed/${user.uid}/200/200` }}
           size={60}
@@ -52,7 +52,7 @@ const UserInfo = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 36,
+    padding: 30,
   },
 })
 

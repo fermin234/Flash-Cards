@@ -1,5 +1,4 @@
 import { Button } from '@rneui/base';
-import to from 'await-to-js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback, useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
@@ -9,6 +8,7 @@ import { ROUTES } from '../constants/navigation.constants';
 import { COLORS, COMPONENT, FONT } from '../constants/style.contstants';
 import { useUser } from '../hooks/auth';
 import { useForm } from '../hooks/form';
+import to from 'await-to-js';
 
 const baseState = () => ({
   email: '',
@@ -16,7 +16,6 @@ const baseState = () => ({
 });
 
 const Login = ({ navigation }) => {
-
   const [user, setUser] = useUser();
   const [form, setForm] = useForm(baseState());
 
@@ -92,9 +91,9 @@ const Login = ({ navigation }) => {
             onPress={doLogin}
             disabled={!valid}
           />
+          {error && <Text style={styles.error}>{error}</Text>}
         </View>
 
-        {error && <Text style={styles.error}>{error}</Text>}
 
         <Button
           buttonStyle={styles.link.button}
@@ -110,7 +109,7 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   outer: {
     backgroundColor: COLORS.highlight,
-    padding: 36,
+    padding: 30,
     height: '100%',
   },
   inner: {
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   error: {
-    textAlign: "center"
+    ...COMPONENT.error,
   }
 });
 

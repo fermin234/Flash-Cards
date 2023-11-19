@@ -1,25 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { useCategories } from "../hooks/data";
+import { FONT } from '../constants/style.contstants'
 import UserInfo from "../Wrappers/UserInfo";
 import AddCategory from "../Components/AddCategory";
-import { useCategories } from "../hooks/data";
 import CategoryCard from "../Components/CategoryCard";
-import { FONT } from '../constants/style.contstants'
 
 const Categories = () => {
-
   const categories = useCategories()
 
   return (
-    <UserInfo>
-      <View>
-        <Text style={styles.h2}>Flashcards</Text>
-        <Text style={styles.sub}>Select your set</Text>
-      </View>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <UserInfo style={styles.a}>
+        <View>
+          <Text style={styles.h2}>Flashcards</Text>
+          <Text style={styles.sub}>Select your set</Text>
+        </View>
 
-      <AddCategory />
+        <AddCategory />
 
-      <View>
         {categories.length ? (
           categories.map((category, index) => (
             <CategoryCard
@@ -31,14 +29,18 @@ const Categories = () => {
         ) : (
           <Text>Try adding a new category</Text>
         )}
-      </View>
-    </UserInfo>
+
+      </UserInfo>
+    </ScrollView >
   );
 };
 
 const styles = StyleSheet.create({
   h2: { ...FONT.h2 },
   sub: { ...FONT.sub },
+  text: {
+    fontSize: 25
+  },
 });
 
 export default Categories;

@@ -4,11 +4,11 @@ import { Button } from '@rneui/base';
 import { COLORS, FONT, COMPONENT } from '../constants/style.contstants';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../api/db';
-import to from 'await-to-js';
 import { MESSAGES } from '../constants/errors.contstants';
 import { ROUTES } from '../constants/navigation.constants';
 import { useUser } from '../hooks/auth';
 import { useForm } from '../hooks/form';
+import to from 'await-to-js';
 
 const baseState = () => ({
   email: '',
@@ -120,7 +120,7 @@ const SignUp = ({ navigation }) => {
 const styles = StyleSheet.create({
   outer: {
     backgroundColor: COLORS.main,
-    padding: 36,
+    padding: 30,
     height: '100%',
   },
   inner: {

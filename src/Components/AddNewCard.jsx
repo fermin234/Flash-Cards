@@ -1,12 +1,11 @@
 import { StyleSheet, TextInput, View, Text } from 'react-native'
-import React from 'react'
 import { Button, FAB, Overlay } from '@rneui/base'
-import useModal from '../hooks/modal'
 import { useForm } from '../hooks/form'
 import { cards } from '../api/db'
 import { useUser } from '../hooks/auth'
 import { useRoute } from '@react-navigation/native'
 import { FONT, COLORS, COMPONENT } from '../constants/style.contstants'
+import useModal from '../hooks/modal'
 
 const baseState = () => ({
   front: "",
@@ -15,7 +14,6 @@ const baseState = () => ({
 })
 
 const AddNewCard = () => {
-
   const [user] = useUser()
   const { visible, hide, show } = useModal()
   const [form, setForm] = useForm(baseState())
@@ -38,13 +36,12 @@ const AddNewCard = () => {
         style={styles.button}
         color={COLORS.highlight}
         onPress={show}
-      ></FAB>
+      />
 
       <Overlay
         isVisible={visible}
         onBackdropPress={hide}
-        overlayStyle={styles.overlay}
-      >
+        overlayStyle={styles.overlay}>
         <View>
           <Text style={styles.title}>New Card</Text>
 
@@ -53,25 +50,19 @@ const AddNewCard = () => {
             placeholderTextColor={COLORS.textLight}
             value={form.front}
             onChangeText={(value) => { setForm({ key: "front", value }) }}
-            placeholder='Front...'
-          >
-          </TextInput>
+            placeholder='Front...' />
           <TextInput
             style={styles.input}
             placeholderTextColor={COLORS.textLight}
             value={form.back}
             onChangeText={(value) => { setForm({ key: "back", value }) }}
-            placeholder='Back...'
-          >
-          </TextInput>
+            placeholder='Back...' />
           <TextInput
             style={styles.input}
             placeholderTextColor={COLORS.textLight}
             value={form.detail}
             onChangeText={(value) => { setForm({ key: "detail", value }) }}
-            placeholder='Detail...'
-          >
-          </TextInput>
+            placeholder='Detail...' />
 
           <Button
             titleStyle={styles.sendTitle}
@@ -79,13 +70,10 @@ const AddNewCard = () => {
             title="Add"
             onPress={handleAddNewCard} />
         </View>
-
       </Overlay>
     </View>
   )
 }
-
-export default AddNewCard
 
 const styles = StyleSheet.create({
   button: {
@@ -121,3 +109,5 @@ const styles = StyleSheet.create({
     color: COLORS.main,
   },
 });
+
+export default AddNewCard

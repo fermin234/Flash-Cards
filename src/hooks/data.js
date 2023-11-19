@@ -10,13 +10,11 @@ export const useCategories = () => {
     if (!user) return () => {};
 
     const query = DBCategories.where("userId", "==", user.uid);
-    //googlear esto
     const unsub = query.onSnapshot((qs) => {
       const results = qs.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      //*****************************************************
 
       setCategories(results);
     });

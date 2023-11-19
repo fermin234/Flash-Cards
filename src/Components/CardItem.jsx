@@ -1,18 +1,15 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import useModal from '../hooks/modal'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { useEffect } from 'react'
 import { FONT, COLORS } from '../constants/style.contstants'
+import useModal from '../hooks/modal'
 
 const CardItem = ({ card }) => {
-
   const { visible, toggle, show } = useModal(true)
   const { front, back, detail } = card
 
   useEffect(() => {
     show()
   }, [card])
-
 
   return (
     <TouchableOpacity
@@ -21,6 +18,7 @@ const CardItem = ({ card }) => {
       style={styles.card}
       onPress={toggle}
     >
+
       {visible ? (
         <Text style={styles.title}>{front}</Text>
       ) : (
@@ -29,11 +27,10 @@ const CardItem = ({ card }) => {
           <Text style={styles.sub}> {detail}</Text>
         </>
       )}
+
     </TouchableOpacity>
   )
 }
-
-export default CardItem
 
 const styles = StyleSheet.create({
   card: {
@@ -59,3 +56,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default CardItem

@@ -1,12 +1,10 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
 import { Button, FAB, Overlay } from '@rneui/base'
 import { COLORS, COMPONENT, FONT } from '../constants/style.contstants'
 import { useState, useEffect } from 'react'
 import { useUser } from '../hooks/auth'
 import { useModal } from '../hooks/modal'
-import { cards, categories } from '../api/db';
-
+import { categories } from '../api/db';
 
 const AddCategory = () => {
 

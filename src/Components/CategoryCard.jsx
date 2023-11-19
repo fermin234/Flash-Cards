@@ -1,14 +1,11 @@
-import { StyleSheet, View, TouchableOpacity, Text, } from 'react-native';
-import React from 'react'
+import { StyleSheet, TouchableOpacity, Text, } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../constants/navigation.constants';
 import { COLORS, FONT } from '../constants/style.contstants'
 
 const CategoryCard = ({ category, even }) => {
-
   const navigation = useNavigation();
   const { name, id } = category;
-
 
   return (
     <TouchableOpacity

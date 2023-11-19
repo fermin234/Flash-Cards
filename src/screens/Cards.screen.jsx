@@ -1,18 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import AddNewCard from '../Components/AddNewCard'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useCards } from '../hooks/data'
 import { Button } from '@rneui/base'
 import { useCallback } from 'react'
-import CardItem from '../Components/CardItem'
 import { FONT, COLORS, COMPONENT } from '../constants/style.contstants'
-import UserInfo from '../Wrappers/UserInfo'
 import { pluralize } from '../utils/text'
+import UserInfo from '../Wrappers/UserInfo'
+import AddNewCard from '../Components/AddNewCard'
+import CardItem from '../Components/CardItem'
 
 const Cards = ({ route }) => {
-
   const { id, name } = route.params.category;
   const cards = useCards(id);
   const [active, setActive] = useState(null)
@@ -83,6 +81,7 @@ const Cards = ({ route }) => {
     </UserInfo>
   )
 }
+
 const styles = StyleSheet.create({
   h2: { ...FONT.h2 },
   sub: { ...FONT.sub },
