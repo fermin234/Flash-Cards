@@ -1,6 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableHighlight } from 'react-native'
 import { useEffect } from 'react'
-import { FONT, COLORS } from '../constants/style.contstants'
+import { FONT, COLORS, SIZE } from '../constants/style.contstants'
 import useModal from '../hooks/modal'
 
 const CardItem = ({ card }) => {
@@ -12,7 +12,7 @@ const CardItem = ({ card }) => {
   }, [card])
 
   return (
-    <TouchableOpacity
+    <TouchableHighlight
       underlayColor={COLORS.mainDarker}
       activeOpacity={0.5}
       style={styles.card}
@@ -28,22 +28,19 @@ const CardItem = ({ card }) => {
         </>
       )}
 
-    </TouchableOpacity>
+    </TouchableHighlight>
   )
 }
 
 const styles = StyleSheet.create({
   card: {
-    paddingHorizontal: 24,
-    paddingVertical: 64,
-    marginBottom: 48,
-    borderRadius: 12,
+    height: 250,
     backgroundColor: COLORS.main,
-    textAlign: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    display: 'flex',
-    height: 200,
+    borderRadius: SIZE.sm,
+    marginBottom: SIZE.lg,
+    paddingHorizontal: SIZE.sm,
   },
   title: {
     ...FONT.h3,
@@ -52,6 +49,7 @@ const styles = StyleSheet.create({
   },
   sub: {
     ...FONT.sub,
+    marginTop: SIZE.sm,
     color: COLORS.textLight,
     textAlign: 'center',
   },

@@ -1,13 +1,12 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button, FAB, Overlay } from '@rneui/base'
-import { COLORS, COMPONENT, FONT } from '../constants/style.contstants'
+import { COLORS, COMPONENT, FONT, SIZE } from '../constants/style.contstants'
 import { useState, useEffect } from 'react'
 import { useUser } from '../hooks/auth'
 import { useModal } from '../hooks/modal'
 import { categories } from '../api/db';
 
 const AddCategory = () => {
-
   const [name, setName] = useState('');
   const [user] = useUser();
   const { visible, show, hide } = useModal();
@@ -28,11 +27,10 @@ const AddCategory = () => {
   return (
     <View>
       <FAB
-        icon={{ name: 'add', color: 'white' }}
-        color={COLORS.highlight}
+        icon={{ name: 'add', color: COLORS.textLight }}
+        style={styles.fab}
+        buttonStyle={{ backgroundColor: COLORS.highlight }}
         onPress={show}
-        style={styles.button}
-        size="small"
       />
 
       <Overlay
@@ -48,15 +46,25 @@ const AddCategory = () => {
             placeholder="Category name..."
             onChangeText={(value) => setName(value)}
             value={name}
-            placeholderTextColor={COLORS.textLight}
+            placeholderTextColor={COLORS.detailLight}
           />
-          <Button
-            titleStyle={styles.sendTitle}
-            buttonStyle={styles.send}
-            title="Add"
-            onPress={createCategory}
-            disabled={!name.length}
-          />
+
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Close"
+              titleStyle={styles.closeTitle}
+              buttonStyle={styles.close}
+              onPress={hide}
+            />
+            <Button
+              titleStyle={styles.sendTitle}
+              buttonStyle={styles.send}
+              title="Add"
+              onPress={createCategory}
+              disabled={!name.length}
+            />
+          </View>
+
         </View>
       </Overlay>
     </View>
@@ -64,37 +72,57 @@ const AddCategory = () => {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignSelf: 'flex-end',
-    marginBottom: 36,
+  fab: {
+    backgroundColor: COLORS.highlight,
+    alignSelf: "flex-end",
+    marginBottom: SIZE.lg,
   },
+
   overlay: {
-    width: '80%',
-    backgroundColor: COLORS.main,
-    padding: 24,
-    borderRadius: 24,
+    ...COMPONENT.dialog
   },
+
   title: {
     ...FONT.h3,
     color: COLORS.textLight,
+    marginBottom: SIZE.sm
   },
+
   input: {
+    ...COMPONENT.input,
     borderBottomColor: COLORS.textLight,
-    borderBottomWidth: 1,
     color: COLORS.textLight,
-    marginVertical: 24,
-    padding: 12,
-    paddingBottom: 6,
+    marginBottom: SIZE.lg
   },
+
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+
   send: {
-    ...COMPONENT.button.highlight,
-    width: '40%',
-    alignSelf: 'flex-end',
+    ...COMPONENT.button,
+    ...COMPONENT.button.highlight.button,
+    width: "auto"
   },
+
   sendTitle: {
-    ...FONT.button,
-    color: COLORS.main,
+    ...COMPONENT.button.title,
+    ...COMPONENT.button.highlight.title,
   },
+
+  close: {
+    ...COMPONENT.button,
+    backgroundColor: "transparent",
+    width: "auto",
+    padding: 0
+  },
+
+  closeTitle: {
+    ...COMPONENT.button.title,
+    ...COMPONENT.button.highlight.title,
+  },
+
 });
 
 export default AddCategory

@@ -56,29 +56,27 @@ const Cards = ({ route }) => {
 
   return (
     <UserInfo>
-      <View>
-        <Text style={styles.h2}>{name}</Text>
-        <Text style={styles.sub}>
-          {pluralize({ noun: 'Card', number: cards.length })}
-        </Text>
+      <Text style={styles.h2}>{name}</Text>
+      <Text style={styles.sub}>
+        {pluralize({ noun: 'Card', number: cards.length })}
+      </Text>
 
-        <AddNewCard />
+      <AddNewCard />
 
-        {!cards.length && (
-          <Text style={styles.empty}>Try adding a card first...</Text>
-        )}
+      {!cards.length && (
+        <Text style={styles.empty}>Try adding a card first...</Text>
+      )}
 
-        {active && <CardItem card={activeCard} />}
+      {active && <CardItem card={activeCard} />}
 
-        <Button
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
-          title="Next"
-          disabled={cards.length < 2}
-          onPress={showNewCard}
-        />
-      </View>
-    </UserInfo>
+      <Button
+        buttonStyle={styles.button}
+        titleStyle={styles.buttonTitle}
+        title="Next"
+        disabled={cards.length < 2}
+        onPress={showNewCard}
+      />
+    </UserInfo >
   )
 }
 
@@ -87,10 +85,13 @@ const styles = StyleSheet.create({
   sub: { ...FONT.sub },
   empty: { ...FONT.sub, textAlign: 'center', margin: 36 },
   button: {
-    ...COMPONENT.button.highlight,
+    ...COMPONENT.button,
+    ...COMPONENT.button.highlight.button,
     alignSelf: 'center',
   },
   buttonTitle: {
+    ...COMPONENT.button.title,
+    ...COMPONENT.button.highlight.title,
     ...FONT.button,
     color: COLORS.main,
   },

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useCategories } from "../hooks/data";
-import { FONT } from '../constants/style.contstants'
+import { FONT, SIZE } from '../constants/style.contstants'
 import UserInfo from "../Wrappers/UserInfo";
 import AddCategory from "../Components/AddCategory";
 import CategoryCard from "../Components/CategoryCard";
@@ -10,10 +10,10 @@ const Categories = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <UserInfo style={styles.a}>
-        <View>
-          <Text style={styles.h2}>Flashcards</Text>
-          <Text style={styles.sub}>Select your set</Text>
+      <UserInfo>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>Flashcards</Text>
+          <Text style={styles.subTitle}>Select your set</Text>
         </View>
 
         <AddCategory />
@@ -36,10 +36,14 @@ const Categories = () => {
 };
 
 const styles = StyleSheet.create({
-  h2: { ...FONT.h2 },
-  sub: { ...FONT.sub },
-  text: {
-    fontSize: 25
+  textContainer: {
+    marginBottom: SIZE.lg
+  },
+  title: {
+    ...FONT.h2
+  },
+  subTitle: {
+    ...FONT.sub
   },
 });
 

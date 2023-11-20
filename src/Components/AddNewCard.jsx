@@ -4,7 +4,7 @@ import { useForm } from '../hooks/form'
 import { cards } from '../api/db'
 import { useUser } from '../hooks/auth'
 import { useRoute } from '@react-navigation/native'
-import { FONT, COLORS, COMPONENT } from '../constants/style.contstants'
+import { FONT, COLORS, COMPONENT, SIZE } from '../constants/style.contstants'
 import useModal from '../hooks/modal'
 
 const baseState = () => ({
@@ -32,9 +32,9 @@ const AddNewCard = () => {
   return (
     <View>
       <FAB
-        icon={{ name: 'add', color: 'white' }}
-        style={styles.button}
-        color={COLORS.highlight}
+        icon={{ name: 'add', color: COLORS.textLight }}
+        style={styles.fab}
+        buttonStyle={{ backgroundColor: COLORS.highlight }}
         onPress={show}
       />
 
@@ -42,72 +42,99 @@ const AddNewCard = () => {
         isVisible={visible}
         onBackdropPress={hide}
         overlayStyle={styles.overlay}>
-        <View>
-          <Text style={styles.title}>New Card</Text>
+        <Text style={styles.title}>New Card</Text>
 
-          <TextInput
-            style={styles.input}
-            placeholderTextColor={COLORS.textLight}
-            value={form.front}
-            onChangeText={(value) => { setForm({ key: "front", value }) }}
-            placeholder='Front...' />
-          <TextInput
-            style={styles.input}
-            placeholderTextColor={COLORS.textLight}
-            value={form.back}
-            onChangeText={(value) => { setForm({ key: "back", value }) }}
-            placeholder='Back...' />
-          <TextInput
-            style={styles.input}
-            placeholderTextColor={COLORS.textLight}
-            value={form.detail}
-            onChangeText={(value) => { setForm({ key: "detail", value }) }}
-            placeholder='Detail...' />
+        <TextInput
+          style={styles.input}
+          placeholderTextColor={COLORS.detailLight}
+          value={form.front}
+          onChangeText={(value) => { setForm({ key: "front", value }) }}
+          placeholder='Front...' />
+        <TextInput
+          style={styles.input}
+          placeholderTextColor={COLORS.detailLight}
+          value={form.back}
+          onChangeText={(value) => { setForm({ key: "back", value }) }}
+          placeholder='Back...' />
+        <TextInput
+          style={styles.input}
+          placeholderTextColor={COLORS.detailLight}
+          value={form.detail}
+          onChangeText={(value) => { setForm({ key: "detail", value }) }}
+          placeholder='Detail...' />
 
+        <View style={styles.buttonContainer}>
           <Button
-            titleStyle={styles.sendTitle}
-            buttonStyle={styles.send}
+            title="Close"
+            titleStyle={styles.closeTitle}
+            buttonStyle={styles.close}
+            onPress={hide}
+          />
+          <Button
+            titleStyle={styles.addTitle}
+            buttonStyle={styles.add}
             title="Add"
-            onPress={handleAddNewCard} />
+            onPress={handleAddNewCard}
+          />
         </View>
+
       </Overlay>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignSelf: 'flex-end',
-    marginBottom: 36,
+  fab: {
+    backgroundColor: COLORS.highlight,
+    alignSelf: "flex-end",
+    marginBottom: SIZE.lg,
   },
+
   overlay: {
-    width: '80%',
-    backgroundColor: COLORS.main,
-    padding: 36,
-    borderRadius: 12,
+    ...COMPONENT.dialog
   },
+
   title: {
     ...FONT.h3,
     color: COLORS.textLight,
+    marginBottom: SIZE.sm
   },
+
   input: {
+    ...COMPONENT.input,
     borderBottomColor: COLORS.textLight,
-    borderBottomWidth: 1,
     color: COLORS.textLight,
-    marginVertical: 12,
-    padding: 12,
-    paddingBottom: 6,
+    marginBottom: SIZE.lg
   },
-  send: {
-    ...COMPONENT.button.highlight,
-    width: '40%',
-    alignSelf: 'flex-end',
-    marginTop: 24,
+
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
-  sendTitle: {
-    ...FONT.button,
-    color: COLORS.main,
+
+  add: {
+    ...COMPONENT.button,
+    ...COMPONENT.button.highlight.button,
+    width: "auto"
   },
+
+  addTitle: {
+    ...COMPONENT.button.title,
+    ...COMPONENT.button.highlight.title,
+  },
+
+  close: {
+    ...COMPONENT.button,
+    backgroundColor: "transparent",
+    width: "auto",
+    padding: 0
+  },
+
+  closeTitle: {
+    ...COMPONENT.button.title,
+    ...COMPONENT.button.highlight.title,
+  },
+
 });
 
 export default AddNewCard

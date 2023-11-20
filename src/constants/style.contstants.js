@@ -6,7 +6,9 @@ export const COLORS = {
   text: "#151515",
   textLight: "#FFFFFF",
   detail: "#8c8c8c",
+  detailLight: "#dcdcdc",
   bacground: "#FFFFFF",
+  danger: "#f80045",
   error: "red",
 };
 
@@ -52,28 +54,6 @@ export const FONT = {
   },
 };
 
-// export const COMPONENT = {
-//   button: {
-//     main: {
-//       backgroundColor: COLORS.main,
-//       borderRadius: 36,
-//       color: COLORS.textLight,
-//       paddingHorizontal: 12,
-//       width: "80%",
-//     },
-//     highlight: {
-//       backgroundColor: COLORS.highlight,
-//       borderRadius: 36,
-//       color: COLORS.text,
-//       paddingHorizontal: 12,
-//       width: "80%",
-//     },
-//   },
-//   error: {
-//     textAlign: "center",
-//     color: "red",
-//   },
-// };
 export const COMPONENT = {
   button: {
     width: "80%",
@@ -110,5 +90,12 @@ export const COMPONENT = {
   error: {
     textAlign: "center",
     color: "red",
+  },
+
+  dialog: {
+    backgroundColor: COLORS.main,
+    borderRadius: SIZE.md,
+    width: "80%",
+    padding: SIZE.lg,
   },
 };
