@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button } from '@rneui/base';
-import { COLORS, FONT, COMPONENT } from '../constants/style.contstants';
+import { COLORS, FONT, COMPONENT, SIZE } from '../constants/style.contstants';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../api/db';
 import { MESSAGES } from '../constants/errors.contstants';
@@ -96,20 +96,21 @@ const SignUp = ({ navigation }) => {
               setForm({ key: 'passwordConfirmation', value })
             }
           />
-
-          <Button
-            titleStyle={FONT.button}
-            buttonStyle={styles.button}
-            title="Sign Up"
-            onPress={doSignUp}
-            disabled={!valid}
-          />
         </View>
+
+        <Button
+          titleStyle={styles.buttonTitle}
+          buttonStyle={styles.button}
+          title="Sign Up"
+          onPress={doSignUp}
+          disabled={!valid}
+        />
+
         {error && <Text style={styles.error}>{error}</Text>}
 
         <Button
-          buttonStyle={styles.link.button}
-          titleStyle={styles.link.title}
+          buttonStyle={styles.link}
+          titleStyle={styles.linkTitle}
           title="Login instead"
           onPress={() => navigation.navigate(ROUTES.login)}
         />
@@ -118,48 +119,56 @@ const SignUp = ({ navigation }) => {
   )
 }
 const styles = StyleSheet.create({
+
   outer: {
     backgroundColor: COLORS.main,
-    padding: 30,
+    padding: SIZE.lg,
     height: '100%',
   },
+
   inner: {
-    backgroundColor: 'white',
-    borderRadius: 12,
-    flex: 1,
+    backgroundColor: COLORS.bacground,
+    padding: SIZE.lg,
     alignContent: 'center',
     justifyContent: 'center',
-    padding: 36,
+    borderRadius: SIZE.md,
+    flex: 1,
   },
-  input: {
-    borderBottomColor: COLORS.main,
-    borderBottomWidth: 1,
-    marginBottom: 24,
-    padding: 12,
-    paddingBottom: 6,
-  },
+
   title: {
     ...FONT.h1,
-    marginBottom: 32,
+    marginBottom: SIZE.lg,
   },
-  button: {
-    ...COMPONENT.button.main,
-    marginVertical: 32,
-    marginLeft: '10%',
-  },
-  link: {
-    button: {
-      backgroundColor: 'transparent',
-    },
-    title: {
-      ...FONT.sub,
-      fontSize: 14,
-    },
-  },
+
   inputContainer: {
-    alignContent: 'center',
-    justifyContent: 'center',
+    marginBottom: SIZE.lg,
   },
+
+  input: {
+    ...COMPONENT.input,
+    borderBottomColor: COLORS.main,
+  },
+
+  button: {
+    ...COMPONENT.button,
+    ...COMPONENT.button.main.button,
+    alignSelf: "center",
+    marginBottom: SIZE.lg
+  },
+
+  buttonTitle: {
+    ...COMPONENT.button.title,
+    ...COMPONENT.button.main.title,
+  },
+
+  link: {
+    backgroundColor: "transparent"
+  },
+
+  linkTitle: {
+    ...FONT.sub
+  },
+
   error: {
     textAlign: "center"
   }

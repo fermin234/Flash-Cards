@@ -5,7 +5,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { auth } from '../api/db';
 import { MESSAGES } from '../constants/errors.contstants';
 import { ROUTES } from '../constants/navigation.constants';
-import { COLORS, COMPONENT, FONT } from '../constants/style.contstants';
+import { COLORS, COMPONENT, FONT, SIZE } from '../constants/style.contstants';
 import { useUser } from '../hooks/auth';
 import { useForm } from '../hooks/form';
 import to from 'await-to-js';
@@ -83,21 +83,21 @@ const Login = ({ navigation }) => {
             secureTextEntry
             onChangeText={(value) => setForm({ key: 'password', value })}
           />
-
-          <Button
-            titleStyle={FONT.button}
-            buttonStyle={styles.button}
-            title="Login"
-            onPress={doLogin}
-            disabled={!valid}
-          />
-          {error && <Text style={styles.error}>{error}</Text>}
         </View>
 
+        <Button
+          titleStyle={styles.buttonTitle}
+          buttonStyle={styles.button}
+          title="Login"
+          onPress={doLogin}
+          disabled={!valid}
+        />
+
+        {error && <Text style={styles.error}>{error}</Text>}
 
         <Button
-          buttonStyle={styles.link.button}
-          titleStyle={styles.link.title}
+          buttonStyle={styles.link}
+          titleStyle={styles.linkTitle}
           title="Sign up instead"
           onPress={() => navigation.navigate(ROUTES.signup)}
         />
@@ -107,58 +107,66 @@ const Login = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+
   outer: {
     backgroundColor: COLORS.highlight,
-    padding: 30,
+    padding: SIZE.lg,
     height: '100%',
   },
+
   inner: {
-    backgroundColor: 'white',
-    borderRadius: 12,
-    flex: 1,
+    backgroundColor: COLORS.bacground,
+    padding: SIZE.lg,
     alignContent: 'center',
     justifyContent: 'center',
-    padding: 36,
+    borderRadius: SIZE.md,
+    flex: 1,
   },
-  input: {
-    borderBottomColor: COLORS.main,
-    borderBottomWidth: 1,
-    marginBottom: 24,
-    padding: 12,
-    paddingBottom: 6,
-  },
-  inputError: {
-    borderBottomColor: COLORS.error,
-    borderBottomWidth: 1,
-    marginBottom: 24,
-    padding: 12,
-    paddingBottom: 6,
-  },
+
   title: {
     ...FONT.h1,
-    marginBottom: 32,
+    marginBottom: SIZE.lg,
   },
-  button: {
-    ...COMPONENT.button.main,
-    marginVertical: 32,
-    marginLeft: '10%',
-  },
-  link: {
-    button: {
-      backgroundColor: 'transparent',
-    },
-    title: {
-      ...FONT.sub,
-      fontSize: 14,
-    },
-  },
+
   inputContainer: {
-    alignContent: 'center',
-    justifyContent: 'center',
+    marginBottom: SIZE.lg,
   },
+
+  input: {
+    ...COMPONENT.input,
+    borderBottomColor: COLORS.main,
+  },
+
+  button: {
+    ...COMPONENT.button,
+    ...COMPONENT.button.highlight.button,
+    alignSelf: "center",
+    marginBottom: SIZE.lg
+  },
+
+  buttonTitle: {
+    ...COMPONENT.button.title,
+    ...COMPONENT.button.main.title,
+  },
+
+  link: {
+    backgroundColor: "transparent"
+  },
+
+  linkTitle: {
+    ...FONT.sub
+  },
+
   error: {
-    ...COMPONENT.error,
+    ...COMPONENT.error
+  },
+
+  inputError: {
+    ...COMPONENT.input,
+    borderBottomColor: "red",
   }
+
 });
+
 
 export default Login

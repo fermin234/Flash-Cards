@@ -6,6 +6,7 @@ export const COLORS = {
   text: "#151515",
   textLight: "#FFFFFF",
   detail: "#8c8c8c",
+  bacground: "#FFFFFF",
   error: "red",
 };
 
@@ -22,52 +23,90 @@ export const FONT_SIZE = {
   md: 18,
   lg: 20,
   xl: 32,
-  xxl: 42,
+  xxl: 38,
 };
 
 export const FONT = {
   h1: {
-    fontSize: 32,
+    fontSize: FONT_SIZE.xl,
     fontWeight: "900",
     color: COLORS.text,
   },
   h2: {
-    fontSize: 38,
+    fontSize: FONT_SIZE.xxl,
     fontWeight: "600",
     color: COLORS.main,
   },
   h3: {
-    fontSize: 32,
+    fontSize: FONT_SIZE.xl,
     fontWeight: "500",
   },
   sub: {
-    fontSize: 18,
+    fontSize: FONT_SIZE.sm,
     fontWeight: "400",
     color: COLORS.detail,
   },
   button: {
+    fontSize: FONT_SIZE.lg,
     fontWeight: "700",
-    fontSize: 20,
   },
 };
 
+// export const COMPONENT = {
+//   button: {
+//     main: {
+//       backgroundColor: COLORS.main,
+//       borderRadius: 36,
+//       color: COLORS.textLight,
+//       paddingHorizontal: 12,
+//       width: "80%",
+//     },
+//     highlight: {
+//       backgroundColor: COLORS.highlight,
+//       borderRadius: 36,
+//       color: COLORS.text,
+//       paddingHorizontal: 12,
+//       width: "80%",
+//     },
+//   },
+//   error: {
+//     textAlign: "center",
+//     color: "red",
+//   },
+// };
 export const COMPONENT = {
   button: {
+    width: "80%",
+    paddingVertical: SIZE.xs,
+    paddingHorizontal: SIZE.md,
+    borderRadius: SIZE.lg,
+
+    title: { ...FONT.button },
+
     main: {
-      backgroundColor: COLORS.main,
-      borderRadius: 36,
-      color: COLORS.textLight,
-      paddingHorizontal: 12,
-      width: "80%",
+      button: {
+        backgroundColor: COLORS.main,
+      },
+      title: {
+        color: COLORS.textLight,
+      },
     },
     highlight: {
-      backgroundColor: COLORS.highlight,
-      borderRadius: 36,
-      color: COLORS.text,
-      paddingHorizontal: 12,
-      width: "80%",
+      button: {
+        backgroundColor: COLORS.highlight,
+      },
+      title: {
+        color: COLORS.text,
+      },
     },
   },
+
+  input: {
+    borderBottomWidth: 1,
+    marginBottom: SIZE.sm,
+    paddingTop: SIZE.sm,
+  },
+
   error: {
     textAlign: "center",
     color: "red",
