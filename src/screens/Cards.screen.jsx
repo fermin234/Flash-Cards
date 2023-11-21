@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useCards } from '../hooks/data'
@@ -58,7 +58,7 @@ const Cards = ({ route }) => {
     <UserInfo>
       <Text style={styles.h2}>{name}</Text>
       <Text style={styles.sub}>
-        {pluralize({ noun: 'Card', number: cards.length })}
+        {pluralize({ text: 'Card', quantity: cards.length })}
       </Text>
 
       <AddNewCard />

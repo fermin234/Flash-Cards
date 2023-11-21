@@ -6,6 +6,7 @@ import { useUser } from '../hooks/auth'
 import { useRoute } from '@react-navigation/native'
 import { FONT, COLORS, COMPONENT, SIZE } from '../constants/style.contstants'
 import useModal from '../hooks/modal'
+import { useEffect, useState } from 'react'
 
 const baseState = () => ({
   front: "",
@@ -17,6 +18,7 @@ const AddNewCard = () => {
   const [user] = useUser()
   const { visible, hide, show } = useModal()
   const [form, setForm] = useForm(baseState())
+  const [active, setActive] = useState(true)
   const route = useRoute()
   const { id: categoryId } = route.params.category;
 
@@ -28,6 +30,15 @@ const AddNewCard = () => {
     });
     hide()
   }
+
+  useEffect(() => {
+    if (form.front.length && form.back.length) setActive(false)
+    else setActive(true)
+  }, [form])
+
+  useEffect(() => {
+    setForm(baseState())
+  }, [visible])
 
   return (
     <View>
@@ -75,6 +86,7 @@ const AddNewCard = () => {
             buttonStyle={styles.add}
             title="Add"
             onPress={handleAddNewCard}
+            disabled={active}
           />
         </View>
 
