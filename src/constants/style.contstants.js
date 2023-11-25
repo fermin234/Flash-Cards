@@ -43,6 +43,10 @@ export const FONT = {
     fontSize: FONT_SIZE.xl,
     fontWeight: "500",
   },
+  h4: {
+    fontSize: FONT_SIZE.lg,
+    fontWeight: "600",
+  },
   sub: {
     fontSize: FONT_SIZE.sm,
     fontWeight: "400",

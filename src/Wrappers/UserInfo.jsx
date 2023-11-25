@@ -26,17 +26,22 @@ const UserInfo = ({ children }) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Avatar
-          source={{ uri: `https://picsum.photos/seed/${user.uid}/200/200` }}
-          size={60}
-          rounded
-          onPress={() => setVisible(true)}
-          containerStyle={styles.avatarContainer}
-        />
+      <View style={styles.header}>
+        <View style={styles.emailContainer}>
+          <Text style={styles.email}>{user.email}</Text>
+        </View>
+        <View style={styles.avatarContainer}>
+          <Avatar
+            source={{ uri: `https://picsum.photos/seed/${user.uid}/200/200` }}
+            size={60}
+            rounded
+            onPress={() => setVisible(true)}
+            containerStyle={styles.avatar}
+          />
+        </View>
       </View>
 
-      <View>{children}</View>
+      <View style={styles.childrenContainer}>{children}</View>
 
       <BottomSheet
         isVisible={visible}
@@ -49,22 +54,38 @@ const UserInfo = ({ children }) => {
           </ListItem.Content>
         </ListItem>
       </BottomSheet>
-
+      {console.log(user.providerData)}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: SIZE.lg,
-  },
-  avatarContainer: {
+  avatar: {
     alignSelf: "flex-end"
+  },
+  header: {
+    backgroundColor: COLORS.main,
+    padding: SIZE.sm,
+    flexDirection: "row",
+    alignItems: "center",
   },
   logout: {
     ...FONT.h1,
     color: COLORS.danger,
     fontSize: FONT_SIZE.lg
+  },
+  childrenContainer: {
+    paddingHorizontal: SIZE.sm
+  },
+  avatarContainer: {
+    width: "50%",
+  },
+  emailContainer: {
+    width: "50%"
+  },
+  email: {
+    ...FONT.h4,
+    color: COLORS.highlight
   }
 })
 
