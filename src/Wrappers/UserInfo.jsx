@@ -6,6 +6,7 @@ import { auth } from '../api/db';
 import { ROUTES } from '../constants/navigation.constants';
 import { useUser } from '../hooks/auth';
 import { SIZE, FONT, COLORS, FONT_SIZE } from '../constants/style.contstants';
+import FormChangePassword from '../Components/FormChangePassword';
 
 const UserInfo = ({ children }) => {
   const [user, setUser] = useUser();
@@ -47,6 +48,7 @@ const UserInfo = ({ children }) => {
         isVisible={visible}
         onBackdropPress={() => setVisible(false)}
       >
+        <FormChangePassword />
         <ListItem onPress={doLogout}>
           <Icon name="logout" color={COLORS.text}></Icon>
           <ListItem.Content>
@@ -54,7 +56,6 @@ const UserInfo = ({ children }) => {
           </ListItem.Content>
         </ListItem>
       </BottomSheet>
-      {console.log(user.providerData)}
     </View>
   )
 }
