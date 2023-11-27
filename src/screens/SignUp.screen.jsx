@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button } from '@rneui/base';
 import { COLORS, FONT, COMPONENT, SIZE } from '../constants/style.contstants';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { auth } from '../api/db';
 import { MESSAGES } from '../constants/errors.contstants';
 import { ROUTES } from '../constants/navigation.constants';
@@ -35,15 +35,19 @@ const SignUp = ({ navigation }) => {
       setError(MESSAGES[code] || code);
     } else {
       setForm(baseState());
-      auth.currentUser = userCredentials.user;
       setUser(userCredentials.user);
-      navigation.navigate(ROUTES.categories);
+
+      sendEmailVerification(auth.currentUser).then(() => {
+        Alert.alert("Email verification link sent")
+      })
+
+      // navigation.navigate(ROUTES.categories);
     }
   }, [form, setError, navigation, setUser]);
 
-  useEffect(() => {
-    if (user) navigation.navigate(ROUTES.categories);
-  }, [navigation, user]);
+  // useEffect(() => {
+  //   if (user) navigation.navigate(ROUTES.categories);
+  // }, [navigation, user]);
 
   useEffect(() => {
     const { email, password, passwordConfirmation } = form;
