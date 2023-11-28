@@ -14,4 +14,5 @@ export const MESSAGES = {
     "Password must be at least 8 characters long.",
   "Passwords do not match.": "Passwords do not match.",
   "Incorrect email address.": "Incorrect email address.",
+  "": "",
 };

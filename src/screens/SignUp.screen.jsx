@@ -28,6 +28,11 @@ const SignUp = ({ navigation }) => {
 
   const doSignUp = useCallback(async () => {
     try {
+
+      if (password.trim() !== passwordConfirmation.trim()) {
+        return setError("Passwords do not match.");
+      }
+
       if (error) return
 
       const [signUpError, userCredentials] = await to(
@@ -67,16 +72,19 @@ const SignUp = ({ navigation }) => {
 
   const [errorInput, setErrorInput] = useState(errorsState(form))
 
+  //Verificador de acount.
   useEffect(() => {
     if (user && user?.emailVerified)
       navigation.navigate(ROUTES.categories);
   }, [navigation, user]);
 
+  //Validador de formulario
   useEffect(() => {
     const code = validateSignUp(form);
     setError(code !== "" ? MESSAGES[code] : null);
-  }, [form]);
+  }, [form, doSignUp]);
 
+  //Validador de formulario para controlar los icons de los inputs
   useEffect(() => {
     setErrorInput(errorsState(form))
   }, [form]);

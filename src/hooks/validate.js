@@ -23,12 +23,8 @@ export const validateSignUp = ({
     return "Incorrect email address.";
   }
 
-  if (password.length < 6) {
+  if (password.length < 8) {
     return "Password must be at least 8 characters long.";
-  }
-
-  if (password !== passwordConfirmation) {
-    return "Passwords do not match.";
   }
 
   return "";
