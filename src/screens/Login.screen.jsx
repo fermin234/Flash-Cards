@@ -1,7 +1,7 @@
-import { Button } from '@rneui/base';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback, useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button } from '@rneui/base';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../api/db';
 import { MESSAGES } from '../constants/errors.contstants';
 import { ROUTES } from '../constants/navigation.constants';
@@ -24,7 +24,8 @@ const Login = ({ navigation }) => {
 
   const { email, password } = form;
 
-  const doLogin = useCallback(async () => {
+  const handleDoLogin = useCallback(async () => {
+
     const [loginError, userCredentials] = await to(
       signInWithEmailAndPassword(auth, form.email, form.password)
     );
@@ -36,12 +37,17 @@ const Login = ({ navigation }) => {
       setForm(baseState());
       auth.currentUser = userCredentials.user;
       setUser(userCredentials.user);
-      navigation.navigate(ROUTES.categories);
+
+      if (user && !user?.emailVerified)
+        navigation.navigate(ROUTES.emailVerification);
     }
+
   }, [form, setError, navigation, setUser]);
 
   useEffect(() => {
-    if (user) navigation.navigate(ROUTES.categories);
+    if (user && user?.emailVerified)
+      navigation.navigate(ROUTES.categories);
+
   }, [navigation, user]);
 
   useEffect(() => {
@@ -89,7 +95,7 @@ const Login = ({ navigation }) => {
           titleStyle={styles.buttonTitle}
           buttonStyle={styles.button}
           title="Login"
-          onPress={doLogin}
+          onPress={handleDoLogin}
           disabled={!valid}
         />
 
@@ -107,13 +113,11 @@ const Login = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-
   outer: {
     backgroundColor: COLORS.highlight,
     padding: SIZE.lg,
     height: '100%',
   },
-
   inner: {
     backgroundColor: COLORS.bacground,
     padding: SIZE.lg,
@@ -122,50 +126,40 @@ const styles = StyleSheet.create({
     borderRadius: SIZE.md,
     flex: 1,
   },
-
   title: {
     ...FONT.h1,
     marginBottom: SIZE.lg,
   },
-
   inputContainer: {
     marginBottom: SIZE.lg,
   },
-
   input: {
     ...COMPONENT.input,
     borderBottomColor: COLORS.main,
   },
-
   button: {
     ...COMPONENT.button,
     ...COMPONENT.button.highlight.button,
     alignSelf: "center",
     marginBottom: SIZE.lg
   },
-
   buttonTitle: {
     ...COMPONENT.button.title,
     ...COMPONENT.button.main.title,
   },
-
   link: {
     backgroundColor: "transparent"
   },
-
   linkTitle: {
     ...FONT.sub
   },
-
   error: {
     ...COMPONENT.error
   },
-
   inputError: {
     ...COMPONENT.input,
     borderBottomColor: "red",
   }
-
 });
 
 

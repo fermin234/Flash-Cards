@@ -5,6 +5,7 @@ import SignUp from '../screens/SignUp.screen';
 import Categories from '../screens/Categories.screen';
 import Login from '../screens/Login.screen';
 import Cards from '../screens/Cards.screen';
+import EmailVerification from '../screens/EmailVerification.screen';
 
 const Stack = createNativeStackNavigator()
 
@@ -24,6 +25,9 @@ const Navigation = () => {
         <Stack.Screen
           name={ROUTES.cards.name}
           component={Cards} />
+        <Stack.Screen
+          name={ROUTES.emailVerification}
+          component={EmailVerification} />
       </Stack.Navigator>
     </NavigationContainer>
   );
