@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { Button } from '@rneui/base';
+import { Button, Icon } from '@rneui/base';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../api/db';
 import { MESSAGES } from '../constants/errors.contstants';
@@ -73,23 +73,39 @@ const Login = ({ navigation }) => {
       <View style={styles.inner}>
         <Text style={styles.title}>Welcome{'\n'}Back</Text>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={error ? styles.inputError : styles.input}
-            placeholder="Email Address"
-            value={email}
-            textContentType="emailAddress"
-            onChangeText={(value) => setForm({ key: 'email', value })}
-          />
-          <TextInput
-            style={error ? styles.inputError : styles.input}
-            placeholder="Password"
-            value={password}
-            textContentType="password"
-            secureTextEntry
-            onChangeText={(value) => setForm({ key: 'password', value })}
-          />
+        <View style={styles.inputAllContainer}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={error ? styles.inputError : styles.input}
+              placeholder="Email Address"
+              value={email}
+              textContentType="emailAddress"
+              onChangeText={(value) => setForm({ key: 'email', value })}
+            />
+            <Icon name="error" color={COLORS.danger} style={{ opacity: error ? 1 : 0 }} />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={error ? styles.inputError : styles.input}
+              placeholder="Password"
+              value={password}
+              textContentType="password"
+              secureTextEntry
+              onChangeText={(value) => setForm({ key: 'password', value })}
+            />
+            <Icon name="error" color={COLORS.danger} style={{ opacity: error ? 1 : 0 }} />
+          </View>
+
         </View>
+
+
+        {error &&
+          <View style={styles.errorContainer}>
+            <Text>{error}</Text>
+            <Icon name="error" color={COLORS.danger} />
+          </View>
+        }
 
         <Button
           titleStyle={styles.buttonTitle}
@@ -99,7 +115,6 @@ const Login = ({ navigation }) => {
           disabled={!valid}
         />
 
-        {error && <Text style={styles.error}>{error}</Text>}
 
         <Button
           buttonStyle={styles.link}
@@ -110,6 +125,14 @@ const Login = ({ navigation }) => {
       </View>
     </View>
   )
+}
+
+const input = {
+  flex: 1,
+  ...COMPONENT.input,
+  color: COLORS.textLight,
+  marginRight: SIZE.sm,
+  color: COLORS.text,
 }
 
 const styles = StyleSheet.create({
@@ -130,12 +153,16 @@ const styles = StyleSheet.create({
     ...FONT.h1,
     marginBottom: SIZE.lg,
   },
-  inputContainer: {
+  inputAllContainer: {
     marginBottom: SIZE.lg,
   },
   input: {
+    ...input
+  },
+  inputError: {
+    ...input,
     ...COMPONENT.input,
-    borderBottomColor: COLORS.main,
+    borderBottomColor: COLORS.danger,
   },
   button: {
     ...COMPONENT.button,
@@ -153,13 +180,16 @@ const styles = StyleSheet.create({
   linkTitle: {
     ...FONT.sub
   },
-  error: {
-    ...COMPONENT.error
+  errorContainer: {
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: SIZE.sm
   },
-  inputError: {
-    ...COMPONENT.input,
-    borderBottomColor: "red",
-  }
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+  },
 });
 
 
