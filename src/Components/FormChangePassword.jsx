@@ -19,10 +19,15 @@ const passwordState = () => ({
   newPassword: false
 })
 
+const errorsState = () => ({
+  currentPassword: "Current password is required.",
+  newPassword: "New password is required.",
+})
+
 const FormChangePassword = () => {
   const { hide, show, visible } = useModal()
   const [passwordVisible, setPasswordVisible] = useForm(passwordState())
-  const [errors, setErrors] = useState()
+  const [errors, setErrors] = useState(errorsState())
   const [form, setForm] = useForm(formState())
   const [user] = useUser()
 
@@ -35,8 +40,29 @@ const FormChangePassword = () => {
       }
     } catch (err) {
       const code = err.message.match(/\((.*?)\)/)
-      setErrors(code[1])
+
+      if (code[1] === "auth/invalid-login-credentials") {
+        setErrors({
+          ...errors,
+          auth: "Current password is incorrect."
+        })
+        return
+      }
+
+      setErrors({
+        ...errors,
+        "auth": code[1]
+      })
     }
+  }
+
+  const handleChangeInput = ({ value, key }) => {
+    setForm({
+      ...form,
+      [key]: value
+    })
+
+    passwordValidate(value, key, errors, setErrors)
   }
 
   useEffect(() => {
@@ -45,8 +71,10 @@ const FormChangePassword = () => {
   }, [visible])
 
   useEffect(() => {
-    setErrors(passwordValidate(form))
-  }, [form])
+    () => {
+      setErrors(errorsState())
+    }
+  }, [])
 
   return (
     <View>
@@ -59,11 +87,11 @@ const FormChangePassword = () => {
 
         <View style={styles.inputContainer}>
           <TextInput
-            style={errors ? styles.inputError : styles.input}
+            style={errors.currentPassword ? styles.inputError : styles.input}
             placeholderTextColor={COLORS.detailLight}
             value={form.currentPassword}
             secureTextEntry={!passwordVisible.currentPassword}
-            onChangeText={(value) => setForm({ key: "currentPassword", value })}
+            onChangeText={(value) => handleChangeInput({ key: "currentPassword", value })}
             placeholder='Current Password'
           />
 
@@ -76,11 +104,11 @@ const FormChangePassword = () => {
 
         <View style={styles.inputContainer}>
           <TextInput
-            style={errors ? styles.inputError : styles.input}
+            style={errors.newPassword ? styles.inputError : styles.input}
             placeholderTextColor={COLORS.detailLight}
             value={form.newPassword}
             secureTextEntry={!passwordVisible.newPassword}
-            onChangeText={(value) => setForm({ key: "newPassword", value })}
+            onChangeText={(value) => handleChangeInput({ key: "newPassword", value })}
             placeholder='New Password'
           />
 
@@ -91,19 +119,18 @@ const FormChangePassword = () => {
           />
         </View>
 
-        <View style={styles.errorContainer}>
-          {errors && <>
-            <Text style={styles.textError}>{MESSAGES[errors]}</Text>
+        {!Object.values(errors).every((error) => error.length === 0) &&
+          <View style={styles.errorContainer}>
+            <Text style={styles.textError}>{errors.currentPassword || errors.newPassword || errors.auth}</Text>
             <Icon name="error" color="#DC143C" />
-          </>
-          }
-        </View>
+          </View>
+        }
 
         <Button
           title="Accept"
           titleStyle={styles.acceptTitle}
           buttonStyle={styles.accept}
-          disabled={!(form.newPassword.length > 7 && form.currentPassword.length > 7 && !errors)}
+          disabled={!(form.newPassword.length > 7 && form.currentPassword.length > 7 && Object.values(errors).every((error) => error.length === 0))}
           onPress={handleChangePassword}
         />
       </Overlay>

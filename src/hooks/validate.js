@@ -1,12 +1,13 @@
-export const passwordValidate = ({ currentPassword, newPassword }) => {
-  if (!currentPassword) return "no-current-password";
-
-  if (!newPassword) return "no-new-password";
-
-  if (currentPassword.length < 8 || newPassword.length < 8)
-    return "Password length > 7";
-
-  return "";
+export const passwordValidate = (value, key, errors, setErrors) => {
+  if (value.length < 8)
+    return setErrors({
+      ...errors,
+      [key]: "Password must be at least 8 characters.",
+    });
+  setErrors({
+    ...errors,
+    [key]: "",
+  });
 };
 
 export const validateSignUp = ({
