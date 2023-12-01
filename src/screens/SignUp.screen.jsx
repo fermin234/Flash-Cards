@@ -5,7 +5,7 @@ import { auth } from '../api/db';
 import { useUser } from '../hooks/auth';
 import { COLORS, FONT, COMPONENT, SIZE } from '../constants/style.contstants';
 import { Icon, Button } from '@rneui/base';
-import { validateForm } from '../hooks/validate';
+import useValidate from '../hooks/validate';
 import { ROUTES } from '../constants/navigation.constants'
 import { MESSAGES } from '../constants/errors.contstants'
 import to from 'await-to-js';
@@ -19,6 +19,7 @@ const baseState = () => ({
 
 const SignUp = ({ navigation }) => {
   const [formData, setFormData] = useState(baseState());
+  const { validateForm } = useValidate()
   const [user, setUser] = useUser()
   const [visibilityPasswords, setVisibilityPasswords] = useState({
     password: false,

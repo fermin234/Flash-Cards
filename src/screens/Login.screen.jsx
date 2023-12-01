@@ -9,30 +9,34 @@ import { COLORS, COMPONENT, FONT, SIZE } from '../constants/style.contstants';
 import { useUser } from '../hooks/auth';
 import { useForm } from '../hooks/form';
 import to from 'await-to-js';
+import useValidate from '../hooks/validate'
 
 const baseState = () => ({
   email: '',
   password: '',
 });
 
+const errorsState = () => ({
+  email: 'Email is required.',
+  password: 'Password is required.',
+});
+
 const Login = ({ navigation }) => {
   const [user, setUser] = useUser();
   const [form, setForm] = useForm(baseState());
-
   const [valid, setValid] = useState(false);
-  const [error, setError] = useState(null);
-
+  const [errors, setErrors] = useState(errorsState());
+  const { validateEmail, validateForm } = useValidate()
   const { email, password } = form;
 
   const handleDoLogin = useCallback(async () => {
-
     const [loginError, userCredentials] = await to(
       signInWithEmailAndPassword(auth, form.email, form.password)
     );
 
     if (loginError) {
       const { code } = loginError;
-      setError(MESSAGES[code] || code);
+      setErrors({ ...errors, "auth": MESSAGES[code] || code });
     } else {
       setForm(baseState());
       auth.currentUser = userCredentials.user;
@@ -42,7 +46,27 @@ const Login = ({ navigation }) => {
         navigation.navigate(ROUTES.emailVerification);
     }
 
-  }, [form, setError, navigation, setUser]);
+  }, [form, setErrors, navigation, setUser]);
+
+  const handleChangeInput = ({ key, value }) => {
+    setForm({ key, value })
+
+
+    if (key === "email") {
+      const isValid = validateEmail(value)
+
+      isValid ? setErrors({
+        ...errors,
+        email: ""
+      }) : setErrors({
+        ...errors,
+        email: "Email invalid."
+      })
+
+    } else {
+      validateForm(key, value, errors, setErrors)
+    }
+  }
 
   useEffect(() => {
     if (user && user?.emailVerified)
@@ -64,10 +88,6 @@ const Login = ({ navigation }) => {
     });
   }, [form]);
 
-  useEffect(() => {
-    setError(null);
-  }, [form, setError]);
-
   return (
     <View style={styles.outer}>
       <View style={styles.inner}>
@@ -76,33 +96,33 @@ const Login = ({ navigation }) => {
         <View style={styles.inputAllContainer}>
           <View style={styles.inputContainer}>
             <TextInput
-              style={error ? styles.inputError : styles.input}
+              style={errors.email || errors.auth ? styles.inputError : styles.input}
               placeholder="Email Address"
               value={email}
               textContentType="emailAddress"
-              onChangeText={(value) => setForm({ key: 'email', value })}
+              onChangeText={(value) => handleChangeInput({ key: 'email', value })}
             />
-            <Icon name="error" color={COLORS.danger} style={{ opacity: error ? 1 : 0 }} />
+            <Icon name="error" color={COLORS.danger} style={{ opacity: errors.email || errors.auth ? 1 : 0 }} />
           </View>
 
           <View style={styles.inputContainer}>
             <TextInput
-              style={error ? styles.inputError : styles.input}
+              style={errors.password || errors.auth ? styles.inputError : styles.input}
               placeholder="Password"
               value={password}
               textContentType="password"
               secureTextEntry
-              onChangeText={(value) => setForm({ key: 'password', value })}
+              onChangeText={(value) => handleChangeInput({ key: 'password', value })}
             />
-            <Icon name="error" color={COLORS.danger} style={{ opacity: error ? 1 : 0 }} />
+            <Icon name="error" color={COLORS.danger} style={{ opacity: errors.password || errors.auth ? 1 : 0 }} />
           </View>
 
         </View>
 
 
-        {error &&
+        {!Object.values(errors).every((errors) => errors.length === 0) &&
           <View style={styles.errorContainer}>
-            <Text>{error}</Text>
+            <Text>{errors.email || errors.password || errors.auth}</Text>
             <Icon name="error" color={COLORS.danger} />
           </View>
         }
