@@ -7,9 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/icon.png",
+      "resizeMode": "resizeMode",
+      "backgroundColor": "#FFE0AC"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -18,8 +18,8 @@
     "android": {
       "package": "com.flashcards.app",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FFE0AC"
       }
     },
     "web": {

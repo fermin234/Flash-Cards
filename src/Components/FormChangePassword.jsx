@@ -3,11 +3,9 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { COLORS, COMPONENT, FONT, SIZE } from '../constants/style.contstants'
 import { Button, Overlay, ListItem, Icon } from '@rneui/base'
 import { useModal } from '../hooks/modal'
-import { changePassword } from '../hooks/changePassword'
-import { useUser } from '../hooks/auth'
+import { useChangePassword, useUser } from '../hooks/auth'
 import { useForm } from '../hooks/form'
-import { MESSAGES } from '../constants/errors.contstants'
-import { passwordValidate } from '../hooks/validate'
+import useValidate from '../hooks/validate'
 
 const formState = () => ({
   currentPassword: "",
@@ -29,6 +27,8 @@ const FormChangePassword = () => {
   const [passwordVisible, setPasswordVisible] = useForm(passwordState())
   const [errors, setErrors] = useState(errorsState())
   const [form, setForm] = useForm(formState())
+  const { changePassword } = useChangePassword()
+  const { passwordValidate } = useValidate()
   const [user] = useUser()
 
   const handleChangePassword = async () => {
@@ -67,7 +67,7 @@ const FormChangePassword = () => {
 
   useEffect(() => {
     setForm(formState())
-    setPasswordVisible(false)
+    setPasswordVisible(passwordState())
   }, [visible])
 
   useEffect(() => {

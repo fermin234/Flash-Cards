@@ -21,12 +21,17 @@ const errorsState = () => ({
   password: 'Password is required.',
 });
 
+const passwordState = () => ({
+  password: false,
+});
+
 const Login = ({ navigation }) => {
   const [user, setUser] = useUser();
   const [form, setForm] = useForm(baseState());
   const [valid, setValid] = useState(false);
   const [errors, setErrors] = useState(errorsState());
   const { validateEmail, validateForm } = useValidate()
+  const [visibilityPasswords, setVisibilityPasswords] = useState(passwordState())
   const { email, password } = form;
 
   const handleDoLogin = useCallback(async () => {
@@ -111,10 +116,17 @@ const Login = ({ navigation }) => {
               placeholder="Password"
               value={password}
               textContentType="password"
-              secureTextEntry
+              secureTextEntry={!visibilityPasswords.password}
               onChangeText={(value) => handleChangeInput({ key: 'password', value })}
             />
-            <Icon name="error" color={COLORS.danger} style={{ opacity: errors.password || errors.auth ? 1 : 0 }} />
+
+            <View style={{ display: errors.password || errors.auth ? "flex" : "none" }}>
+              <Icon name="error" color={COLORS.danger} />
+            </View>
+            <Icon
+              name={visibilityPasswords.password ? "visibility" : "visibility-off"}
+              onPress={() => setVisibilityPasswords({ ...visibilityPasswords, "password": !visibilityPasswords.password })}
+            />
           </View>
 
         </View>

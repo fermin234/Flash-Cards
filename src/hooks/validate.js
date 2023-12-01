@@ -8,6 +8,7 @@ export default useValidate = () => {
     setErrors({
       ...errors,
       [key]: "",
+      auth: "",
     });
   };
 

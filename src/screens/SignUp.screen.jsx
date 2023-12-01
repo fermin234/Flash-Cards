@@ -116,11 +116,15 @@ const SignUp = ({ navigation }) => {
               onChangeText={(value) => handleChange('password', value)}
               secureTextEntry={!visibilityPasswords.password}
             />
+
+
+            <View style={{ display: errors.password ? "flex" : "none" }}>
+              <Icon name="error" color={COLORS.danger} />
+            </View>
             <Icon
               name={visibilityPasswords.password ? "visibility" : "visibility-off"}
               onPress={() => setVisibilityPasswords({ ...visibilityPasswords, "password": !visibilityPasswords.password })}
             />
-            <Icon name="error" color={COLORS.danger} style={!errors.password && { opacity: 0 }} />
           </View>
 
           <View style={styles.inputContainer}>
@@ -131,11 +135,14 @@ const SignUp = ({ navigation }) => {
               onChangeText={(value) => handleChange('confirmPassword', value)}
               secureTextEntry={!visibilityPasswords.confirmPassword}
             />
+
+            <View style={{ display: errors.confirmPassword ? "flex" : "none" }}>
+              <Icon name="error" color={COLORS.danger} />
+            </View>
             <Icon
-              name={visibilityPasswords.password ? "visibility" : "visibility-off"}
+              name={visibilityPasswords.confirmPassword ? "visibility" : "visibility-off"}
               onPress={() => setVisibilityPasswords({ ...visibilityPasswords, "confirmPassword": !visibilityPasswords.confirmPassword })}
             />
-            <Icon name="error" color={COLORS.danger} style={!errors.confirmPassword && { opacity: 0 }} />
           </View>
 
         </View>
