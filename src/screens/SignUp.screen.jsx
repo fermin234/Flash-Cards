@@ -19,7 +19,7 @@ const baseState = () => ({
 
 const SignUp = ({ navigation }) => {
   const [formData, setFormData] = useState(baseState());
-  const { validateForm } = useValidate()
+  const { validateForm, validatePasswords } = useValidate()
   const [user, setUser] = useUser()
   const [visibilityPasswords, setVisibilityPasswords] = useState({
     password: false,
@@ -37,19 +37,29 @@ const SignUp = ({ navigation }) => {
       ...formData,
       [name]: value,
     });
+
     validateForm(name, value, errors, setErrors)
   };
 
-  const handleSubmit = async () => {
-    if (formData.password !== formData.confirmPassword) {
-      setErrors({
-        ...errors,
-        confirmPassword: 'Passwords do not match.',
-        password: 'Passwords do not match.',
-      });
-      return;
+  const handleOnBlur = (name) => {
+    if (name === "password" || name === "confirmPassword") {
+      const password = formData.password
+      const confirmPassword = formData.confirmPassword
+      const isValid = validatePasswords(password, confirmPassword, errors, setErrors)
+      if (isValid) {
+        setErrors({
+          ...errors,
+          password: "",
+          confirmPassword: "",
+        })
+      }
+      return
     }
+    const value = formData[name]
+    validateForm(name, value, errors, setErrors)
+  }
 
+  const handleSubmit = async () => {
     const formIsValid = Object.values(errors).every((error) => error.length === 0);
 
     if (formIsValid) {
@@ -93,6 +103,7 @@ const SignUp = ({ navigation }) => {
               style={errors.name ? styles.inputError : styles.input}
               value={formData.name}
               onChangeText={(value) => handleChange('name', value)}
+              onBlur={() => handleOnBlur('name')}
             />
             <Icon name="error" color={COLORS.danger} style={!errors.name && { opacity: 0 }} />
           </View>
@@ -103,6 +114,7 @@ const SignUp = ({ navigation }) => {
               style={errors.email ? styles.inputError : styles.input}
               value={formData.email}
               onChangeText={(value) => handleChange('email', value)}
+              onBlur={() => handleOnBlur('email')}
             />
             <Icon name="error" color={COLORS.danger} style={!errors.email && { opacity: 0 }} />
           </View>
@@ -114,6 +126,7 @@ const SignUp = ({ navigation }) => {
               value={formData.password}
               ref={element => this.flatlist = element}
               onChangeText={(value) => handleChange('password', value)}
+              onBlur={() => handleOnBlur('password')}
               secureTextEntry={!visibilityPasswords.password}
             />
 
@@ -133,6 +146,7 @@ const SignUp = ({ navigation }) => {
               style={errors.confirmPassword ? styles.inputError : styles.input}
               value={formData.confirmPassword}
               onChangeText={(value) => handleChange('confirmPassword', value)}
+              onBlur={() => handleOnBlur('confirmPassword')}
               secureTextEntry={!visibilityPasswords.confirmPassword}
             />
 
@@ -159,6 +173,7 @@ const SignUp = ({ navigation }) => {
           buttonStyle={styles.button}
           title="Sign Up"
           onPress={handleSubmit}
+          disabled={!Object.values(errors).every((error) => error.length === 0)}
         />
 
         <Button

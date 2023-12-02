@@ -30,7 +30,7 @@ const Login = ({ navigation }) => {
   const [form, setForm] = useForm(baseState());
   const [valid, setValid] = useState(false);
   const [errors, setErrors] = useState(errorsState());
-  const { validateEmail, validateForm } = useValidate()
+  const { validateForm } = useValidate()
   const [visibilityPasswords, setVisibilityPasswords] = useState(passwordState())
   const { email, password } = form;
 
@@ -55,22 +55,7 @@ const Login = ({ navigation }) => {
 
   const handleChangeInput = ({ key, value }) => {
     setForm({ key, value })
-
-
-    if (key === "email") {
-      const isValid = validateEmail(value)
-
-      isValid ? setErrors({
-        ...errors,
-        email: ""
-      }) : setErrors({
-        ...errors,
-        email: "Email invalid."
-      })
-
-    } else {
-      validateForm(key, value, errors, setErrors)
-    }
+    validateForm(key, value, errors, setErrors)
   }
 
   useEffect(() => {

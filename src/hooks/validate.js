@@ -1,4 +1,17 @@
 export default useValidate = () => {
+  const validatePasswords = (password, confirmPassword, errors, setErrors) => {
+    if (password !== confirmPassword) {
+      setErrors({
+        ...errors,
+        confirmPassword: "Passwords do not match.",
+        password: "Passwords do not match.",
+      });
+      return;
+    } else {
+      return true;
+    }
+  };
+
   const passwordValidate = (value, key, errors, setErrors) => {
     if (value.length < 8)
       return setErrors({
@@ -22,18 +35,21 @@ export default useValidate = () => {
       case "name":
         setErrors({
           ...errors,
+          auth: "",
           [name]: value.length < 3 ? `${name} is required.` : "",
         });
         break;
       case "email":
         setErrors({
           ...errors,
+          auth: "",
           email: validateEmail(value) ? "" : "Enter a valid email.",
         });
         break;
       case "password":
         setErrors({
           ...errors,
+          auth: "",
           [name]:
             value.length === 0
               ? `Password is required.`
@@ -45,6 +61,7 @@ export default useValidate = () => {
       case "confirmPassword":
         setErrors({
           ...errors,
+          auth: "",
           [name]:
             value.length === 0
               ? `Password confirm is required.`
@@ -58,5 +75,5 @@ export default useValidate = () => {
     }
   };
 
-  return { passwordValidate, validateEmail, validateForm };
+  return { passwordValidate, validatePasswords, validateEmail, validateForm };
 };
