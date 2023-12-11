@@ -51,4 +51,5 @@ A continuación, se muestran algunas capturas de pantalla de la aplicación:
   <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_8_lk93cp.jpg' />
   <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_9_u4k9xd.jpg' />
   <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_10_bbvnxq.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.05_lruptu.jpg' />
 </div>
