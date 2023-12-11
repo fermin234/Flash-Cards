@@ -40,15 +40,15 @@ Aplicación:
 A continuación, se muestran algunas capturas de pantalla de la aplicación:
 
 <div align='center'>
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_zehtry.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_1_vxikzv.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_2_arlife.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_4_fdlprv.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_3_pwu2oe.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_7_ngemia.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_6_gqrdvy.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_5_bgsfak.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_8_lk93cp.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_9_u4k9xd.jpg' />
-  <img width='400px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_10_bbvnxq.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_zehtry.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_1_vxikzv.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_2_arlife.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_4_fdlprv.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334360/WhatsApp_Image_2023-12-11_at_19.22.04_3_pwu2oe.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_7_ngemia.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_6_gqrdvy.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_5_bgsfak.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_8_lk93cp.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_9_u4k9xd.jpg' />
+  <img width='200px' src='https://res.cloudinary.com/dy0r9xqqv/image/upload/v1702334361/WhatsApp_Image_2023-12-11_at_19.22.04_10_bbvnxq.jpg' />
 </div>
