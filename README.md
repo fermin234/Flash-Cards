@@ -31,9 +31,9 @@ FlashCards es una aplicación móvil desarrollada con React Native y Expo que te
 4. **Estudio Efectivo:**
    - Utiliza la aplicación para estudiar de manera efectiva tus tarjetas personalizadas y mejorar tu conocimiento.
 
-## Instalación
+## Aplicación
 
-Aplicación: 
+Aplicación: https://youtu.be/UaXtypfygAQ
 
 ## Capturas de Pantalla
 
